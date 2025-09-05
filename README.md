@@ -17,18 +17,18 @@ This project served as my introduction to web development and exploring new fram
 ## Screenshots
 
 ### Main Interface
-![Pokemon Finder Interface](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/1-V1bjtAdRUYI6bOHVzj7385SOWSgkBS.jpeg)
+![Pokemon Finder Interface](https://github.com/roshaanmehar/DotnetTestProject/blob/main/1.jpeg)
 
 ### Search Results Examples
 
 **Pikachu**
-![Pikachu Details](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/2-nHpSRU82OCjOPMxYwtFvkyf0LV6U6j.jpeg)
+![Pikachu Details](https://github.com/roshaanmehar/DotnetTestProject/blob/main/2.jpeg)
 
 **Squirtle** 
-![Squirtle Details](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/3-QbVQPastLHyfDmASdxQEkktWp9Loeh.jpeg)
+![Squirtle Details](https://github.com/roshaanmehar/DotnetTestProject/blob/main/3.jpeg)
 
 **Charizard**
-![Charizard Details](https://hebbkx1anhila5yf.public.blob.vercel-storage.com/4-iVBjVWe0tuzTZXgDJDjOV3zqoGqDGe.jpeg)
+![Charizard Details](https://github.com/roshaanmehar/DotnetTestProject/blob/main/4.jpeg)
 
 ## Getting Started
 
