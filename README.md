@@ -4,7 +4,7 @@ A simple Pokemon search application that allows users to look up Pokemon and vie
 
 ## About This Project
 
-This project served as my introduction to web development and exploring new frameworks. It's a straightforward implementation focused on learning fundamental concepts and getting familiar with the development workflow.
+This project served as my introduction to .NET development and C# programming, combined with modern frontend technologies. It's a full-stack implementation focused on learning fundamental concepts of both backend and frontend development, helping me get familiar with the .NET ecosystem and web development workflow.
 
 ## Features
 
@@ -30,6 +30,7 @@ This project served as my introduction to web development and exploring new fram
 **Charizard**
 ![Charizard Details](https://github.com/roshaanmehar/DotnetTestProject/blob/main/4.jpeg)
 
+
 ## Getting Started
 
 1. Clone this repository
@@ -39,20 +40,35 @@ This project served as my introduction to web development and exploring new fram
 
 ## Technologies Used
 
-- Frontend framework for user interface
-- API integration for Pokemon data
-- Responsive CSS styling
-- Modern web development practices
+### Backend (.NET/C#)
+- **ASP.NET Core** - Web framework for building the API
+- **C#** - Primary programming language for backend logic
+- **MVC Architecture** - Model-View-Controller pattern for organized code structure
+- **Pokemon Service** - Custom service layer for Pokemon data handling
+
+### Frontend (Next.js/React)
+- **Next.js 14** - React framework for the user interface
+- **TypeScript** - Type-safe JavaScript for better development experience
+- **Tailwind CSS** - Utility-first CSS framework for styling
+- **shadcn/ui** - Modern component library built on Radix UI
+- **React Hook Form + Zod** - Form handling and validation
+
+### Development Tools
+- **pnpm** - Fast, disk space efficient package manager
+- **Vercel** - Deployment and hosting platform
+- **PostCSS** - CSS processing and optimization
 
 ## Learning Outcomes
 
 This project helped me understand:
-- Basic web application structure
-- API integration and data handling
-- User interface design principles
-- Search functionality implementation
-- Responsive web design
+- **.NET Core fundamentals** and C# programming concepts
+- **Full-stack development** with separate frontend and backend
+- **API design** and service layer architecture
+- **Modern React patterns** with TypeScript
+- **Component-based UI development** with reusable design systems
+- **Responsive web design** and CSS frameworks
 
 ---
 
 *This was my first project exploring web development concepts - kept simple and focused on core functionality.*
+
