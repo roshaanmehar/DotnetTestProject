@@ -1,0 +1,173 @@
+﻿@{
+    ViewData["Title"] = "Pokemon Finder";
+}
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2><i class="fas fa-search"></i> Pokemon Finder</h2>
+                </div>
+                <div class="card-body">
+                    <form id="pokemonForm">
+                        <div class="input-group mb-3">
+                            <input type="text"
+                                   class="form-control form-control-lg"
+                                   id="pokemonName"
+                                   placeholder="Enter Pokemon name (e.g., pikachu, charizard)"
+                                   required>
+                            <button class="btn btn-primary btn-lg" type="submit">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Loading spinner -->
+                    <div id="loading" class="text-center d-none">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2">Searching for Pokemon...</p>
+                    </div>
+
+                    <!-- Pokemon display area -->
+                    <div id="pokemonResult" class="d-none">
+                        <div class="row">
+                            <div class="col-md-4 text-center">
+                                <img id="pokemonImage"
+                                     src="/placeholder.svg"
+                                     alt="Pokemon"
+                                     class="img-fluid rounded shadow"
+                                     style="max-width: 200px;">
+                            </div>
+                            <div class="col-md-8">
+                                <h3 id="pokemonNameDisplay" class="text-primary"></h3>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <p><strong>Height:</strong> <span id="pokemonHeight"></span></p>
+                                        <p><strong>Weight:</strong> <span id="pokemonWeight"></span></p>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <p><strong>Base Experience:</strong> <span id="pokemonExperience"></span></p>
+                                        <p><strong>ID:</strong> <span id="pokemonId"></span></p>
+                                    </div>
+                                </div>
+                                <div class="mt-3">
+                                    <h5>Types:</h5>
+                                    <div id="pokemonTypes"></div>
+                                </div>
+                                <div class="mt-3">
+                                    <h5>Abilities:</h5>
+                                    <div id="pokemonAbilities"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Error message -->
+                    <div id="errorMessage" class="alert alert-danger d-none">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span id="errorText"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('pokemonForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const pokemonName = document.getElementById('pokemonName').value.toLowerCase().trim();
+
+    if (!pokemonName) {
+        showError('Please enter a Pokemon name');
+        return;
+    }
+
+    searchPokemon(pokemonName);
+});
+
+function searchPokemon(name) {
+    showLoading();
+    hideError();
+    hideResult();
+
+    // This will call our backend API (we'll create this in the next step)
+    fetch(`/Home/GetPokemon?name=${encodeURIComponent(name)}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Pokemon not found');
+            }
+            return response.json();
+        })
+        .then(data => {
+            displayPokemon(data);
+        })
+        .catch(error => {
+            showError('Pokemon not found. Please check the spelling and try again.');
+        })
+        .finally(() => {
+            hideLoading();
+        });
+}
+
+function displayPokemon(pokemon) {
+    document.getElementById('pokemonNameDisplay').textContent =
+        pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1);
+    document.getElementById('pokemonImage').src = pokemon.sprites.front_default;
+    document.getElementById('pokemonHeight').textContent = `${pokemon.height / 10} m`;
+    document.getElementById('pokemonWeight').textContent = `${pokemon.weight / 10} kg`;
+    document.getElementById('pokemonExperience').textContent = pokemon.base_experience;
+    document.getElementById('pokemonId').textContent = pokemon.id;
+
+    // Display types
+    const typesContainer = document.getElementById('pokemonTypes');
+    typesContainer.innerHTML = '';
+    pokemon.types.forEach(type => {
+        const badge = document.createElement('span');
+        badge.className = `badge bg-secondary me-2`;
+        badge.textContent = type.type.name;
+        typesContainer.appendChild(badge);
+    });
+
+    // Display abilities
+    const abilitiesContainer = document.getElementById('pokemonAbilities');
+    abilitiesContainer.innerHTML = '';
+    pokemon.abilities.forEach(ability => {
+        const badge = document.createElement('span');
+        badge.className = `badge bg-info me-2`;
+        badge.textContent = ability.ability.name;
+        abilitiesContainer.appendChild(badge);
+    });
+
+    showResult();
+}
+
+function showLoading() {
+    document.getElementById('loading').classList.remove('d-none');
+}
+
+function hideLoading() {
+    document.getElementById('loading').classList.add('d-none');
+}
+
+function showResult() {
+    document.getElementById('pokemonResult').classList.remove('d-none');
+}
+
+function hideResult() {
+    document.getElementById('pokemonResult').classList.add('d-none');
+}
+
+function showError(message) {
+    document.getElementById('errorText').textContent = message;
+    document.getElementById('errorMessage').classList.remove('d-none');
+}
+
+function hideError() {
+    document.getElementById('errorMessage').classList.add('d-none');
+}
+</script>
